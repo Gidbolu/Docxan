@@ -1,18 +1,24 @@
 # Docxan
 
-App Android offline-first para escanear, organizar y respaldar documentos.
+**Offline-first Android app for scanning, organizing, and backing up documents.**
 
-## Estructura
+## Project Structure
 
-- `app/` — Flutter (`applicationId`: `app.docxan`, `minSdk`: 26)
-- `supabase/` — Auth, Postgres (metadatos) y Edge Function de URLs prefirmadas R2
-- `legal/` — política de privacidad y términos (Play)
-- `tool/` — smoke test de Cloudflare R2
-- `packages/` — vacío en el MVP; extracción de módulos después
+- `app/` — Flutter application (`applicationId`: `app.docxan`, `minSdk`: 26)
+- `supabase/` — Authentication, PostgreSQL (metadata), and Edge Function for generating R2 presigned URLs
+- `legal/` — Privacy Policy and Terms of Service (Google Play)
+- `tool/` — Cloudflare R2 smoke test
+- `packages/` — Empty in the MVP; modules will be extracted later
 
-Reglas: un feature no importa a otro. Lo compartido vive en `app/lib/core`. `app/lib/app` es el composition root.
+**Architecture Rules:**
 
-## Arranque local
+- Features must not import other features directly.
+- Shared functionality belongs in `app/lib/core`.
+- `app/lib/app` serves as the composition root.
+
+## Local Setup
+
+Run the development version:
 
 ```bash
 cd app
@@ -20,28 +26,39 @@ flutter pub get
 flutter run --flavor dev -t lib/main_dev.dart
 ```
 
-Producción:
+Run the production version:
 
 ```bash
 flutter run --flavor prod -t lib/main_prod.dart
 ```
 
-## Cuentas (día 1)
+## Required Accounts (Day 1)
 
-1. Google Play Console
-2. **Supabase** — guía: [docs/supabase.md](docs/supabase.md)
-3. Cloudflare R2 (buckets `doxan-backups-dev` / `doxan-backups-prod`) — hecho
-4. Google Cloud OAuth (SHA-1 debug + Play App Signing)
+1. **Google Play Console**
+2. **Supabase** — Setup guide: [docs/supabase.md](docs/supabase.md)
+3. **Cloudflare R2** — Buckets `doxan-backups-dev` and `doxan-backups-prod` (completed)
+4. **Google Cloud OAuth** — Debug SHA-1 and Google Play App Signing configuration
 
-Copia `app/env.example.json` a `app/env.json` (no se sube al repo).
+Copy `app/env.example.json` to `app/env.json`.
 
-Con Supabase:
+**Note:** `env.json` is excluded from version control and must not be committed to the repository.
+
+### Running with Supabase
+
+Once Supabase is configured:
 
 ```bash
 cd app
 flutter run --flavor dev -t lib/main_dev.dart --dart-define-from-file=env.json
 ```
 
-## Stack
+## Tech Stack
 
-Flutter, Riverpod, go_router, Drift, ML Kit OCR, AES-256-GCM, Supabase, Cloudflare R2.
+- **Flutter** — Cross-platform application framework
+- **Riverpod** — State management
+- **go_router** — Navigation and routing
+- **Drift** — Local database and offline-first data persistence
+- **ML Kit OCR** — Optical Character Recognition
+- **AES-256-GCM** — Document encryption
+- **Supabase** — Authentication and PostgreSQL database
+- **Cloudflare R2** — Cloud storage for document backups
