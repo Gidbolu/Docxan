@@ -1,0 +1,7 @@
+project_id = "rwfdwkdlqkowvptcpyvs"
+
+[functions.backup-signed-url]
+verify_jwt = true
+
+[functions.push-send]
+verify_jwt = true

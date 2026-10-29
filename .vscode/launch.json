@@ -1,0 +1,46 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Docxan (vista en Chrome)",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "app",
+      "program": "lib/main_dev.dart",
+      "deviceId": "chrome",
+      "args": [
+        "--web-browser-flag",
+        "--window-size=390,844"
+      ]
+    },
+    {
+      "name": "Docxan (dev)",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "app",
+      "program": "lib/main_dev.dart",
+      "args": ["--flavor", "dev"]
+    },
+    {
+      "name": "Docxan (dev + Supabase)",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "app",
+      "program": "lib/main_dev.dart",
+      "args": [
+        "--flavor",
+        "dev",
+        "--dart-define-from-file",
+        "env.json"
+      ]
+    },
+    {
+      "name": "Docxan (prod)",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "app",
+      "program": "lib/main_prod.dart",
+      "args": ["--flavor", "prod"]
+    }
+  ]
+}
